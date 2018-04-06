@@ -24,7 +24,7 @@ const resizeImage = (path, width, height = width) => {
       width,
       height
     }, err => {
-      if (err) return reject(new Error(err.message))
+      if (err) return reject(new Error())
       resolve(true)
     })
   })
