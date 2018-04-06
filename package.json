@@ -1,0 +1,27 @@
+{
+  "name": "common_utilities",
+  "version": "1.0.0",
+  "description": "utilidades comunes, para la plataforma easyapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ces1508/easyApp_common-utilities.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "ces1508 @christianseguras <ces1508@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ces1508/easyApp_common-utilities/issues"
+  },
+  "homepage": "https://github.com/ces1508/easyApp_common-utilities#readme",
+  "dependencies": {
+    "imagemagick": "^0.1.3",
+    "jsonwebtoken": "^8.2.1",
+    "passport-jwt": "^4.0.0"
+  }
+}
