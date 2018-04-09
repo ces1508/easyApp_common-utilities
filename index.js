@@ -71,11 +71,24 @@ const encrypText = async (txt, salt = null) => {
     })
   })
 }
+const validateData = (requiredFields, data) => {
+  let errors = []
+  for (let field of requiredFields) {
+    if (!data.hasOwnProperty(field)) {
+      errors.push(field)
+    }
+  }
+  return {
+    error: errors.length > 0,
+    message: `the fields ${errors.toString()} are required`
+  }
+}
 
 module.exports = {
   readImage,
   resizeImage,
   Strategy,
   generateJwtToken,
-  encrypText
+  encrypText,
+  validateData
 }
