@@ -37,10 +37,10 @@ jwtOptions.secretOrKey = TOKEN
 const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
   let options = {
     method: 'GET',
-    uri: `http://company/find/${payload.id}`
+    uri: `http://company/${payload.id}`
   }
   request(options, (err, data) => {
-    if (!err) return done(true, null, { error: true, messsage: 'inauctirizade' })
+    if (!err) return done(true, null, { error: true, messsage: 'unauthorized' })
     done(null, {
       id: data.id,
       status: data.status,
