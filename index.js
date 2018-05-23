@@ -86,11 +86,26 @@ const validateData = (requiredFields, data) => {
   }
 }
 
+const handleErrors = (req, res) => {
+  let { error } = req.errors
+  switch (error.code) {
+    case 'NOT_FOUND':
+      res.status(404).json({ error: true, code: error.code })
+      break
+    case 'UNAUTHORIZADE':
+      res.status(403).json({ error: true, code: error.code })
+      break
+    default:
+      res.status(500).json({ error: true, code: 'UNKNOW_ERROR' })
+  }
+}
+
 module.exports = {
   readImage,
   resizeImage,
   Strategy,
   generateJwtToken,
   encrypText,
-  validateData
+  validateData,
+  handleErrors
 }
