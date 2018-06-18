@@ -39,10 +39,11 @@ const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
     method: 'GET',
     uri: `http://companies/${payload.id}`
   }
-  request(options, (err, data) => {
+  request(options, (err, response, data) => {
     if (err) {
       return done(true, null, { error: true, messsage: 'unauthorized' })
     }
+    console.log(data)
     done(null, {
       id: data.id,
       status: data.status
