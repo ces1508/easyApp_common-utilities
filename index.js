@@ -42,8 +42,8 @@ const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
   }
   request(options, (err, response, body) => {
     if (err) {
-      console.log(err)
-      return done(true, null, { error: true, messsage: 'unauthorized' })
+      console.log('si hay error')
+      return done(true, null)
     }
     if (response.statusCode > 205) {
       return done(true, null)
