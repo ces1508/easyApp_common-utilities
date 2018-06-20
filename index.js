@@ -104,13 +104,6 @@ const handleErrors = (req, res) => {
     default:
       res.status(500).json({ error: true, code: 'UNKNOW_ERROR' })
   }
-  const exampleRequest = (cb) => {
-    request({uri: 'http://192.168.99.100:9000/1'}, (err, response, body) => {
-      if (err) return cb(err)
-      if (response.statusCode > 205) return cb({ error: true })
-      return cb({error: false})
-    })
-  }
 }
 
 module.exports = {
@@ -121,5 +114,4 @@ module.exports = {
   encrypText,
   validateData,
   handleErrors,
-  exampleRequest
 }
