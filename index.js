@@ -42,9 +42,11 @@ const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
   }
   request(options, (err, data) => {
     if (err) {
+      console.log(err)
       return done(true, null, { error: true, messsage: 'unauthorized' })
     }
-    let  user  = data.body
+    console.log(data)
+    let user = data.body
     return done(null, {
       id: user.id,
       status: user.status,
