@@ -45,8 +45,7 @@ const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
       console.log(err)
       return done(true, null, { error: true, messsage: 'unauthorized' })
     }
-    console.log(body)
-    console.log('response', response)
+    if (body.error) return done(true, null)
     let user = body
     return done(null, {
       id: user.id,
