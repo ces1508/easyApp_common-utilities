@@ -34,7 +34,7 @@ const jwtOptions = {}
 jwtOptions.jwtFromRequest = ExtactJwt.fromAuthHeaderAsBearerToken()
 jwtOptions.secretOrKey = TOKEN
 
-const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
+const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
   let options = {
     method: 'GET',
     uri: `http://companies/${payload.id}`,
@@ -45,7 +45,9 @@ const Strategy = new JwtStrategy(jwtOptions, async (payload, done) => {
       console.log(err)
       return done(true, null, { error: true, messsage: 'unauthorized' })
     }
-    if (body.error) return done(true, null)
+    if (response.statusCode > 205) {
+      return done(true, null)
+    }
     let user = body
     return done(null, {
       id: user.id,
@@ -102,6 +104,13 @@ const handleErrors = (req, res) => {
     default:
       res.status(500).json({ error: true, code: 'UNKNOW_ERROR' })
   }
+  const exampleRequest = (cb) => {
+    request({uri: 'http://192.168.99.100:9000/1'}, (err, response, body) => {
+      if (err) return cb(err)
+      if (response.statusCode > 205) return cb({ error: true })
+      return cb({error: false})
+    })
+  }
 }
 
 module.exports = {
@@ -111,5 +120,6 @@ module.exports = {
   generateJwtToken,
   encrypText,
   validateData,
-  handleErrors
+  handleErrors,
+  exampleRequest
 }
