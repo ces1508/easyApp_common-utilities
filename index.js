@@ -5,6 +5,9 @@ const crypto = require('crypto')
 const TOKEN = process.env.SECRET__TOKEN || 'asdasdasdadasd'
 const JwtStrategy = require('passport-jwt').Strategy
 const ExtactJwt = require('passport-jwt').ExtractJwt
+const jwtOptions = {}
+jwtOptions.jwtFromRequest = ExtactJwt.fromAuthHeaderAsBearerToken()
+jwtOptions.secretOrKey = TOKEN
 
 const readImage = (path) => {
   return new Promise((resolve, reject) => {
@@ -30,10 +33,6 @@ const resizeImage = (path, width, height = width) => {
   })
 }
 
-const jwtOptions = {}
-jwtOptions.jwtFromRequest = ExtactJwt.fromAuthHeaderAsBearerToken()
-jwtOptions.secretOrKey = TOKEN
-
 const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
   let options = {
     method: 'GET',
@@ -43,10 +42,10 @@ const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
   request(options, (err, response, body) => {
     if (err) {
       console.log('si hay error')
-      return done(true, null)
+      return done(err)
     }
     if (response.statusCode > 205) {
-      return done(true, null)
+      return done(null, false)
     }
     let user = body
     return done(null, {
