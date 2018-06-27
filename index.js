@@ -51,7 +51,8 @@ const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
     return done(null, {
       id: user.id,
       status: user.status,
-      plan: user.planId
+      plan: user.planId,
+      app: user.app[0]
     })
   })
 })
