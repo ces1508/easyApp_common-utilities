@@ -52,7 +52,7 @@ const Strategy = new JwtStrategy(jwtOptions, (payload, done) => {
       id: user.id,
       status: user.status,
       plan: user.planId,
-      app: user.app[0]
+      app: user.app
     })
   })
 })
@@ -113,5 +113,5 @@ module.exports = {
   generateJwtToken,
   encrypText,
   validateData,
-  handleErrors,
+  handleErrors
 }
